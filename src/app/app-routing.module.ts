@@ -4,8 +4,10 @@ import {LoginComponent} from './login/login.component';
 import {SignupComponent} from './signup/signup.component';
 import {UserListComponent} from './user-list/user-list.component';
 import {AuthGuardService} from './services/auth-guard';
+import {MainComponent} from './main/main.component';
 
 const routes: Routes = [
+  {path: '', component: MainComponent, pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignupComponent},
   {path: 'all-users', component: UserListComponent, canActivate: [AuthGuardService]},

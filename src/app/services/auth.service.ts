@@ -54,6 +54,8 @@ export class AuthService {
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
+    setTimeout(() => this.messageSubject.next('Successfully logged out'), 1000);
+    this.router.navigate(['/']);
   }
 
 }
