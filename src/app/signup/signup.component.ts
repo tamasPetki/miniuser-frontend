@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../services/auth.service';
 import {CustomValidator} from './custom-validator';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -13,7 +14,7 @@ export class SignupComponent implements OnInit {
   registrationForm: FormGroup;
   errormessage: string;
 
-  constructor(private auth: AuthService, public fb: FormBuilder) {
+  constructor(private auth: AuthService, public fb: FormBuilder, private router: Router) {
   }
 
   ngOnInit() {
@@ -43,6 +44,7 @@ export class SignupComponent implements OnInit {
   signUp() {
     if (this.registrationForm.valid) {
       this.auth.signUp(this.registrationForm.value);
+      this.router.navigate(['/']);
     }
   }
 

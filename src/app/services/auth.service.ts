@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Subject} from 'rxjs';
 import {tokenNotExpired} from 'angular2-jwt';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class AuthService {
 
   messageSubject = new Subject<string>();
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
   }
 
   login(loginForm) {
@@ -20,6 +21,7 @@ export class AuthService {
           console.log('Successfully logged in');
           localStorage.setItem('token', res['token']);
           localStorage.setItem('userId', res['userId']);
+          this.router.navigate(['/all-users']);
         } else {
           if (res.hasOwnProperty('message')) {
             const message = res['message'];

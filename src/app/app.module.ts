@@ -10,6 +10,7 @@ import { SignupComponent } from './signup/signup.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { UserListComponent } from './user-list/user-list.component';
 import {TokenInterceptor} from './services/token-interceptor';
+import { MainComponent } from './main/main.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import {TokenInterceptor} from './services/token-interceptor';
     LoginComponent,
     SignupComponent,
     NavbarComponent,
-    UserListComponent
+    UserListComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,

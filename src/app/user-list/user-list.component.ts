@@ -18,7 +18,7 @@ export class UserListComponent implements OnInit {
   }
 
   retrieveUserList() {
-    this.http.get(environment.server + '/all-users').subscribe((values) => this.userList = values, error => console.log(error), () => console.log(this.userList));
+    this.http.get(environment.server + '/all-users').subscribe((values) => this.userList = values, error => console.log(error));
   }
 
   deleteUser(index) {
