@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  server: 'http://localhost:3000'
-  // server: 'https://miniuser-backend.herokuapp.com'
+  // server: 'http://localhost:3000'
+  server: 'https://miniuser-backend.herokuapp.com'
 };
 
 /*

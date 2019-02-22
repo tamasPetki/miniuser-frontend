@@ -35,7 +35,7 @@ export class AuthService {
   }
 
   signUp(signUpFrom) {
-    return this.http.put(environment.server + '/signup', signUpFrom, {observe: 'response'}).subscribe(resp => console.log(resp)
+    return this.http.put(environment.server + '/signup', signUpFrom, {observe: 'response'}).subscribe(resp => setTimeout(() => this.messageSubject.next('User created!'), 1000)
       , error => {
         console.log('Something went wrong: ', error.error.errors);
         this.messageSubject.next(error.error.errors[0].msg);
