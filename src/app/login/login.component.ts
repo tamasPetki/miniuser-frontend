@@ -14,6 +14,8 @@ export class LoginComponent implements OnInit {
   constructor(public fb: FormBuilder, private auth: AuthService) { }
 
   ngOnInit() {
+    this.errorMessage = '';
+    this.auth.messageSubject.subscribe((message) => this.errorMessage = message);
     this.loginForm = this.fb.group({
       password: ['', Validators.required],
       email: ['', Validators.required]

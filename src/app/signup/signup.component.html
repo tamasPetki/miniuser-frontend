@@ -1,0 +1,85 @@
+<div class="card mx-auto formcard">
+  <div class="card-body">
+    <form [formGroup]="registrationForm" (ngSubmit)="signUp()">
+      <div class="form-group">
+        <label for="username">Name</label>
+        <input class="form-control" type="text" id="username" name="username" formControlName="name">
+      </div>
+
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <input class="form-control" type="email" id="email" name="email" formControlName="email"
+               [ngClass]="registrationForm.controls['email'].invalid ? 'is-invalid' : ''">
+        <label style="font-size: 1rem" class="col mt-1 text-danger"
+               *ngIf="registrationForm.controls['email'].hasError('email')">
+          Enter a valid email address!
+        </label>
+        <label style="font-size: 1rem" class="col mt-1 text-danger"
+               *ngIf="errormessage">
+          {{errormessage}}
+        </label>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input class="form-control" type="password" id="password" name="password" formControlName="password">
+        <div style="font-size: 1rem" class="mt-1">
+          <label class="col"
+                 [ngClass]="registrationForm.controls['password'].hasError('required') || registrationForm.controls['password'].hasError('minlength')  ? 'text-danger' : 'text-success'">
+            <i class="material-icons">
+              {{ registrationForm.controls['password'].hasError('required') ||
+            registrationForm.controls['password'].hasError('minlength') ? 'cancel' :
+              'check_circle' }}
+            </i>
+            Must be at least 8 characters!
+          </label>
+          <label
+            class="col"
+            [ngClass]="registrationForm.controls['password'].hasError('required') || registrationForm.controls['password'].hasError('hasNumber')  ? 'text-danger' : 'text-success'">
+            <i class="material-icons">
+              {{ registrationForm.controls['password'].hasError('required') ||
+            registrationForm.controls['password'].hasError('hasNumber') ? 'cancel' :
+              'check_circle' }}
+            </i>
+            Must contain at least 1 number!
+          </label>
+          <label
+            class="col"
+            [ngClass]="registrationForm.controls['password'].hasError('required') || registrationForm.controls['password'].hasError('hasCapitalCase')  ? 'text-danger' : 'text-success'">
+            <i class="material-icons">
+              {{ registrationForm.controls['password'].hasError('required') ||
+            registrationForm.controls['password'].hasError('hasCapitalCase') ? 'cancel' :
+              'check_circle' }}
+            </i>
+            Must contain at least 1 in Capital Case!
+          </label>
+          <label
+            class="col"
+            [ngClass]="registrationForm.controls['password'].hasError('required') || registrationForm.controls['password'].hasError('hasSmallCase')  ? 'text-danger' : 'text-success'">
+            <i class="material-icons">
+              {{ registrationForm.controls['password'].hasError('required') ||
+            registrationForm.controls['password'].hasError('hasSmallCase') ? 'cancel' :
+              'check_circle' }}
+            </i>
+            Must contain at least 1 Letter in Small Case!
+          </label>
+          <label
+            class="col"
+            [ngClass]="registrationForm.controls['password'].hasError('required') || registrationForm.controls['password'].hasError('hasSpecialCharacters') ? 'text-danger' : 'text-success'">
+            <i class="material-icons">
+              {{ registrationForm.controls['password'].hasError('required') ||
+            registrationForm.controls['password'].hasError('hasSpecialCharacters') ? 'cancel' :
+              'check_circle' }}
+            </i>
+            Must contain at least 1 Special Character!
+          </label>
+        </div>
+      </div>
+  <button type="submit" class="btn btn-success font-weight-bold btn-lg btn-block">REGISTER
+  </button>
+  <div class="text-center mt-2">
+    <a routerLink="/login">Or login</a>
+  </div>
+    </form>
+  </div>
+</div>

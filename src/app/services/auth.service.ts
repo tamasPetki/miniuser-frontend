@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
+import {Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
+  messageSubject = new Subject<string>();
 
   constructor(private http: HttpClient) { }
 
@@ -16,9 +19,19 @@ export class AuthService {
           localStorage.setItem('token', res['token']);
           localStorage.setItem('userId', res['userId']);
         } else {
-          console.log(res);
+          this.messageSubject.next(res.message);
         }
       },
-      error1 => console.log(error1));
+      error => {
+      console.log(error);
+      });
+  }
+
+  signUp(signUpFrom) {
+    return this.http.put(environment.server + '/signup', signUpFrom, {observe: 'response'}).subscribe(resp => console.log(resp)
+    , error => {
+      console.log('Something went wrong: ', error.error.errors);
+      this.messageSubject.next(error.error.errors[0].msg);
+    });
   }
 }
