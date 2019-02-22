@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Subject} from 'rxjs';
+import {tokenNotExpired} from 'angular2-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -34,4 +35,19 @@ export class AuthService {
       this.messageSubject.next(error.error.errors[0].msg);
     });
   }
+
+  getToken() {
+    return localStorage.getItem('token');
+  }
+
+  public isAuthenticated() {
+    const token = this.getToken();
+    return tokenNotExpired(null, token);
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+  }
+
 }
