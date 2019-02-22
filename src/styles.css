@@ -8,3 +8,16 @@
 .tablecard {
   width: 600px;
 }
+
+@media screen and (max-width: 499px) {
+  .formcard {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 499px) {
+  .tablecard {
+    width: 100%;
+  }
+}
+
