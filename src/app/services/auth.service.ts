@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Subject} from 'rxjs';
@@ -11,7 +11,8 @@ export class AuthService {
 
   messageSubject = new Subject<string>();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   login(loginForm) {
     return this.http.post(environment.server + '/login', loginForm).subscribe(res => {
@@ -20,20 +21,23 @@ export class AuthService {
           localStorage.setItem('token', res['token']);
           localStorage.setItem('userId', res['userId']);
         } else {
-          this.messageSubject.next(res.message);
+          if (res.hasOwnProperty('message')) {
+            const message = res['message'];
+            this.messageSubject.next(message);
+          }
         }
       },
       error => {
-      console.log(error);
+        console.log(error);
       });
   }
 
   signUp(signUpFrom) {
     return this.http.put(environment.server + '/signup', signUpFrom, {observe: 'response'}).subscribe(resp => console.log(resp)
-    , error => {
-      console.log('Something went wrong: ', error.error.errors);
-      this.messageSubject.next(error.error.errors[0].msg);
-    });
+      , error => {
+        console.log('Something went wrong: ', error.error.errors);
+        this.messageSubject.next(error.error.errors[0].msg);
+      });
   }
 
   getToken() {

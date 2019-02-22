@@ -5,9 +5,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import {ReactiveFormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { SignupComponent } from './signup/signup.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { UserListComponent } from './user-list/user-list.component';
+import {TokenInterceptor} from './services/token-interceptor';
 
 
 @NgModule({
@@ -15,7 +17,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     AppComponent,
     LoginComponent,
     SignupComponent,
-    NavbarComponent
+    NavbarComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +26,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
